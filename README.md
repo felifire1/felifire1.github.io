@@ -44,4 +44,8 @@ A `place` starting with "1st" gets the gold 🥇 badge.
 
 ## Deploying
 
-Push the folder to a GitHub repo and enable Pages (Settings → Pages → branch `main`, folder `/`). Or drag the folder onto Netlify / Vercel.
+Live at **https://felifire1.github.io** via GitHub Pages (repo `felifire1/felifire1.github.io`, branch `main`, root). Any push to `main` redeploys in a minute or two:
+
+```bash
+git add -A && git commit -m "Update site" && git push
+```
