@@ -52,11 +52,29 @@ function tagList(tags) {
 
 const GROUPS = [
   { key: "hackathons", label: "Hackathons" },
+  { key: "outdoors", label: "Outdoors" },
   { key: "training", label: "Training" },
   { key: "notes", label: "Notes" },
 ];
 
+// photo card: the image fills the card, caption sits on a gradient; click/Enter opens the viewer
+function photoCard(item) {
+  const card = el("button", "slide photo");
+  card.type = "button";
+  const img = el("img");
+  img.src = item.image; img.alt = item.alt || item.title || ""; img.loading = "lazy"; img.decoding = "async";
+  if (item.focus) img.style.objectPosition = item.focus;
+  const cap = el("span", "photo-cap");
+  cap.append(el("span", "photo-title", item.title));
+  if (item.place) cap.append(el("span", "photo-place", item.place));
+  card.append(img, cap);
+  card.setAttribute("aria-label", `${item.title}${item.place ? ", " + item.place : ""}: view photo`);
+  card.addEventListener("click", () => openViewer(item));
+  return card;
+}
+
 const renderCard = {
+  outdoors: photoCard,
   hackathons(h) {
     const card = el("article", "slide hack glow");
     const top = el("div", "card-top");
@@ -83,6 +101,7 @@ const renderCard = {
     return card;
   },
   training(t) {
+    if (t.image) return photoCard(t);
     const card = el("article", "slide log-card");
     if (t.color) card.style.setProperty("--tint", t.color);
     card.insertAdjacentHTML("afterbegin", svg(t.icon));
@@ -156,6 +175,22 @@ let setBeyondFilter = () => {};
   document.querySelectorAll("[data-filter]").forEach((a) =>
     a.addEventListener("click", () => setBeyondFilter(a.dataset.filter, true)));
 })();
+
+/* ---------- Photo viewer ---------- */
+let viewer;
+function openViewer(item) {
+  if (!viewer) {
+    viewer = document.createElement("dialog");
+    viewer.className = "viewer";
+    viewer.innerHTML = '<figure><img alt="" /><figcaption></figcaption></figure><button class="viewer-close" type="button" aria-label="Close photo">✕</button>';
+    viewer.addEventListener("click", (e) => { if (e.target === viewer || e.target.closest(".viewer-close")) viewer.close(); });
+    document.body.append(viewer);
+  }
+  const img = viewer.querySelector("img");
+  img.src = item.image; img.alt = item.alt || item.title || "";
+  viewer.querySelector("figcaption").textContent = [item.title, item.place].filter(Boolean).join(" · ");
+  viewer.showModal();
+}
 
 /* ---------- Swipe decks ---------- */
 function initDeck(deck) {

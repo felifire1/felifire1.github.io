@@ -44,7 +44,7 @@ A `place` starting with "1st" gets the gold 🥇 badge.
 
 ## Deploying
 
-Live at **https://felifire1.github.io** via GitHub Pages (repo `felifire1/felifire1.github.io`, branch `main`, root). Any push to `main` redeploys in a minute or two. First time on a new machine, run `gh auth setup-git` once so `git push` can use your GitHub CLI login.
+Live at **https://wfquiroz.github.io** via GitHub Pages (repo `wfquiroz/wfquiroz.github.io`, branch `main`, root). Any push to `main` redeploys in a minute or two. First time on a new machine, run `gh auth setup-git` once so `git push` can use your GitHub CLI login.
 
 ```bash
 git add -A && git commit -m "Update site" && git push
