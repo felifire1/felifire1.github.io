@@ -83,9 +83,19 @@ window.PERSONAL = {
 
   // ── Top 5 reads ───────────────────────────────────────────
   //   title, author (required) · note – one line on why (optional)
-  //   cover – "img/covers/…jpg" (optional; without it a styled placeholder cover is drawn)
+  //   cover – image path or URL (optional; if missing or it fails to load, a styled placeholder cover is drawn)
   //   Listed in rank order; only the first 5 show.
   reads: [
+    { title: "Atomic Habits",                        author: "James Clear",
+      cover: "https://covers.openlibrary.org/b/id/12539702-L.jpg" },
+    { title: "The Subtle Art of Not Giving a F*ck",  author: "Mark Manson",
+      cover: "https://covers.openlibrary.org/b/id/8231990-L.jpg" },
+    { title: "Can't Hurt Me",                        author: "David Goggins",
+      cover: "https://covers.openlibrary.org/b/id/8305903-L.jpg" },
+    { title: "The Almanack of Naval Ravikant",       author: "Eric Jorgenson",
+      cover: "https://covers.openlibrary.org/b/id/10449931-L.jpg" },
+    { title: "The 33 Strategies of War",             author: "Robert Greene",
+      cover: "https://covers.openlibrary.org/b/id/1119676-L.jpg" },
   ],
 
   // ── Notes ─────────────────────────────────────────────────

@@ -203,13 +203,18 @@ let setBeyondFilter = () => {};
   reads.forEach((r, i) => {
     const li = el("li", "read");
     const cover = el("div", "read-cover");
-    if (r.cover) {
-      const img = el("img"); img.src = r.cover; img.alt = `Cover of ${r.title}`; img.loading = "lazy";
-      cover.append(img);
-    } else {
+    const drawBlank = () => {
+      cover.replaceChildren();
       cover.classList.add("blank");
       cover.style.setProperty("--hue", String((i * 47 + 18) % 360));
       cover.append(el("span", "read-cover-title", r.title), el("span", "read-cover-author", r.author));
+    };
+    if (r.cover) {
+      const img = el("img"); img.src = r.cover; img.alt = `Cover of ${r.title}`; img.loading = "lazy";
+      img.addEventListener("error", drawBlank, { once: true }); // e.g. the cover host is down
+      cover.append(img);
+    } else {
+      drawBlank();
     }
     const body = el("div", "read-body");
     body.append(el("span", "read-rank", String(i + 1).padStart(2, "0")), el("h3", null, r.title), el("p", "where", r.author));
