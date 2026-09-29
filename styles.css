@@ -153,7 +153,6 @@ h4 { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-trans
 .where { color: var(--muted); font-weight: 500; font-size: 15px; margin-top: 2px; }
 
 .chip { font-family: var(--mono); font-size: 11.5px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
-.live-chip { display: inline-flex; align-items: center; gap: 8px; color: var(--ok); border-color: rgba(74, 222, 128, .3); }
 
 .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .tags li { font-family: var(--mono); font-size: 12px; padding: 4px 10px; border-radius: 6px; background: rgba(255, 122, 69, .09); color: #ffa37d; }
@@ -168,15 +167,6 @@ h4 { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-trans
 }
 .glow:hover::before { opacity: 1; }
 .glow > * { position: relative; }
-
-/* feature */
-.feature { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius); padding: 30px 32px; }
-.feature-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
-.feature h3 { font-size: 24px; }
-.bullets { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 32px; }
-.bullets li { color: var(--muted); font-size: 16px; padding-left: 18px; position: relative; }
-.bullets li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 2px; background: var(--accent); }
-.bullets b { color: var(--text); font-weight: 600; }
 
 /* ---------- SWIPE DECK ---------- */
 .deck-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 36px; }
@@ -248,7 +238,6 @@ h4 { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-trans
 @keyframes here { 0% { box-shadow: 0 0 0 0 rgba(255, 200, 97, .45); } 70%, 100% { box-shadow: 0 0 0 12px rgba(255, 200, 97, 0); } }
 .cp.here .cp-tag { color: var(--accent-2); left: -56px; width: 52px; }
 .cp.here h3 { color: var(--accent-2); }
-.label .updated { color: var(--faint); margin-left: 8px; white-space: nowrap; text-transform: none; letter-spacing: .02em; }
 .cp.start::before { border-color: var(--faint); }
 
 /* toolkit — one quiet line */
@@ -298,9 +287,6 @@ h4 { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-trans
   .deck-controls { margin-bottom: 22px; }
   .deck { margin: 0 -16px; }
   .track { padding: 8px 16px 16px; scroll-padding-inline: 16px; -webkit-mask-image: none; mask-image: none; }
-  .feature { padding: 22px 20px; }
-  .feature-head { flex-direction: column; }
-  .bullets { grid-template-columns: 1fr; }
   .course { margin-left: 8px; }
   .cp { padding-left: 26px; }
   .cp-tag { position: static; display: block; width: auto; text-align: left; transform: none; margin-bottom: 2px; }

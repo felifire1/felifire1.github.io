@@ -10,17 +10,14 @@ python3 -m http.server 8765
 
 | What | Where |
 |---|---|
-| Resume content (now, projects, experience) | `index.html` |
+| Resume content (projects, experience) | `index.html` |
 | Hackathons, outdoors, athletics, and notes cards ("Off the clock") | `personal.js`, grouped by type |
 | Colors, fonts, spacing | `:root` variables at the top of `styles.css` |
 | Hero "athlete profile" values | `index.html`, `<aside class="readout">` |
 
 ### When your role changes
 
-The site is written to stay true long-term. Only two spots mention your current job:
-
-1. **Now section** (`id="block"` in `index.html`): swap in the new role and bump the `updated …` date in its label.
-2. **Experience timeline** (`id="course"`): change the current `📍 Now` item's tag to the next `CP` number and class from `cp here` to `cp`, then add the new role above it as `<li class="cp here">` with the `📍 Now` tag.
+The site is written to stay true long-term. Only the **Experience timeline** (`id="course"` in `index.html`) mentions your current job: change the current `📍 Now` item's tag to the next `CP` number and its class from `cp here` to `cp`, then add the new role above it as `<li class="cp here">` with the `📍 Now` tag.
 
 Keep job-search details (availability dates, where you'd relocate) off the site. They go stale; they belong on the resume.
 
