@@ -195,7 +195,8 @@ let setBeyondFilter = () => {};
   const list = section?.querySelector(".reads");
   if (!list) return;
   const reads = (window.PERSONAL?.reads || []).slice(0, 5);
-  if (!reads.length) {
+  const current = window.PERSONAL?.currentlyReading;
+  if (!reads.length && !current?.title) {
     section.remove();
     document.querySelector('.nav-links a[href="#reads"]')?.remove();
     return;
@@ -222,6 +223,33 @@ let setBeyondFilter = () => {};
     li.append(cover, body);
     list.append(li);
   });
+  if (!reads.length) list.remove();
+
+  // "Currently reading" strip + a nudge to send recommendations (uses the Contact section's email)
+  if (current?.title) {
+    const box = el("div", "now-reading");
+    if (current.cover) {
+      const thumb = el("div", "now-reading-cover");
+      const img = el("img"); img.src = current.cover; img.alt = `Cover of ${current.title}`; img.loading = "lazy";
+      img.addEventListener("error", () => thumb.remove(), { once: true });
+      thumb.append(img);
+      box.append(thumb);
+    }
+    const text = el("div", "now-reading-text");
+    const kicker = el("span", "now-reading-kicker");
+    kicker.append(el("span", "pulse"), "Currently reading");
+    text.append(kicker, el("span", "now-reading-title", current.title));
+    if (current.author) text.append(el("span", "now-reading-author", current.author));
+    box.append(text);
+    const mail = document.querySelector('#contact a[href^="mailto:"]')?.getAttribute("href");
+    if (mail) {
+      const cta = el("a", "now-reading-cta");
+      cta.href = `${mail.split("?")[0]}?subject=${encodeURIComponent("Book rec")}`;
+      cta.append("Have any recs? Reach out ", el("span", "arrow", "→"));
+      box.append(cta);
+    }
+    section.append(box);
+  }
 })();
 
 /* ---------- Photo viewer (gallery) ---------- */

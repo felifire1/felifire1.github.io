@@ -98,6 +98,13 @@ window.PERSONAL = {
       cover: "https://covers.openlibrary.org/b/id/1119676-L.jpg" },
   ],
 
+  // ── Currently reading (shown under the top 5, with a "Have any recs?" email link) ──
+  //   Set to null to hide.
+  currentlyReading: {
+    title: "The Inner Game of Tennis", author: "W. Timothy Gallwey",
+    cover: "https://covers.openlibrary.org/b/id/11442494-L.jpg",
+  },
+
   // ── Notes ─────────────────────────────────────────────────
   //   tag, title, text                       (required)
   //   date, emoji, image ("img/…jpg"), link  (optional; image wins over emoji)
