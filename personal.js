@@ -48,6 +48,7 @@ window.PERSONAL = {
   ],
 
   // ── Outdoors ──────────────────────────────────────────────
+  //   Shown as ONE album card; the FIRST photo is the cover. Clicking opens the rest.
   //   image – path to a photo in img/        (required)
   //   title – short caption                  (required)
   //   place – small line under the title     (optional)
@@ -67,17 +68,16 @@ window.PERSONAL = {
   ],
 
   // ── Athletics ─────────────────────────────────────────────
-  //   Same fields as Outdoors (image, title, place, alt, focus).
-  //   An entry without an image falls back to an icon card: icon (swim | hyrox | run | bike), color, text.
+  //   Same as Outdoors: one album card, FIRST photo is the cover.
   athletics: [
+    { image: "img/ironman-70-3-finish.jpg",         title: "IRONMAN 70.3",
+      alt: "William running toward the finish line of an IRONMAN 70.3", focus: "58% 50%" },
     { image: "img/ironman-barranquilla-finish.jpg", title: "IRONMAN 70.3", place: "Barranquilla, Colombia",
       alt: "William running down the IRONMAN 70.3 Barranquilla finish chute", focus: "40% 55%" },
     { image: "img/hyrox.jpg",                       title: "HYROX",        place: "Finish time 1:20:44",
       alt: "William and a fellow racer flexing in front of a HYROX finish-time screen reading 1:20:44", focus: "50% 45%" },
     { image: "img/nyc-marathon.jpg",                title: "NYC Marathon", place: "TCS New York City Marathon",
       alt: "William holding his bib at the TCS New York City Marathon expo", focus: "50% 55%" },
-    { image: "img/ironman-70-3-finish.jpg",         title: "IRONMAN 70.3",
-      alt: "William running toward the finish line of an IRONMAN 70.3", focus: "58% 50%" },
     { image: "img/ironman-barranquilla-medal.jpg",  title: "Finisher",     place: "IRONMAN 70.3 Barranquilla",
       alt: "William holding his finisher medal in front of the IRONMAN 70.3 Barranquilla sign", focus: "50% 45%" },
   ],

@@ -26,14 +26,8 @@ const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matc
 
 /* ---------- "Beyond the resume": render personal.js (hackathons · outdoors · athletics · notes) ---------- */
 const ICONS = {
-  swim: '<path d="M2 16c2-2 3.5-2 5 0s3 2 5 0 3.5-2 5 0 3 2 5 0M8 10a2 2 0 1 0 0-.1M10 12l4-4 4 3"/>',
-  hyrox: '<path d="M6 7v10M18 7v10M3 9v6M21 9v6M6 12h12"/>',
-  run: '<path d="M13 4a2 2 0 1 0 0 .1M7 21l3-6 3 2 1 4M10 15l1-5 4 3 3-1M11 10l-3 1-2 3"/>',
-  mountain: '<path d="m2 20 7-13 4 7 2-3 7 9Z"/><path d="m7 11 2 1.5 2-1.5"/>',
-  fish: '<path d="M4 12c3-4 9-5 13-1-4 4-10 3-13-1Zm13-1 4-3v6ZM8 11h.01"/>',
-  cook: '<path d="M6 13h12v5a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2ZM4 13h16M9 9c0-2 2-2 2-4M13 9c0-2 2-2 2-4"/>',
-  bike: '<circle cx="5.5" cy="16" r="3.5"/><circle cx="18.5" cy="16" r="3.5"/><path d="m5.5 16 4-7h6l3 7M9.5 9 12 16h-6.5M14 6h2.5"/>',
   github: '<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>',
+  photos: '<rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/><path d="m3 17 4-4 3 3 3-3 4 4"/>',
   link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
 };
 const svg = (name) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ""}</svg>`;
@@ -52,29 +46,38 @@ function tagList(tags) {
 
 const GROUPS = [
   { key: "hackathons", label: "Hackathons" },
-  { key: "outdoors", label: "Outdoors" },
-  { key: "athletics", label: "Athletics" },
+  { key: "outdoors", label: "Outdoors", album: true },
+  { key: "athletics", label: "Athletics", album: true },
   { key: "notes", label: "Notes" },
 ];
 
-// photo card: the image fills the card, caption sits on a gradient; click/Enter opens the viewer
-function photoCard(item) {
-  const card = el("button", "slide photo");
+// album card: the first photo is the cover, stacked "prints" behind it hint there are more;
+// clicking opens the gallery viewer at the first photo
+function albumCard(label, photos) {
+  const cover = photos[0];
+  const card = el("button", "slide album");
   card.type = "button";
+  card.setAttribute("aria-label", `${label}: ${photos.length} photos, open album`);
+  const stack = el("span", "album-stack");
+  stack.setAttribute("aria-hidden", "true");
+  stack.append(el("span", "album-layer l2"), el("span", "album-layer l1"));
+  const face = el("span", "album-face");
   const img = el("img");
-  img.src = item.image; img.alt = item.alt || item.title || ""; img.loading = "lazy"; img.decoding = "async";
-  if (item.focus) img.style.objectPosition = item.focus;
+  img.src = cover.image; img.alt = cover.alt || cover.title || ""; img.loading = "lazy"; img.decoding = "async";
+  if (cover.focus) img.style.objectPosition = cover.focus;
+  const count = el("span", "album-count");
+  count.innerHTML = svg("photos");
+  count.append(String(photos.length));
   const cap = el("span", "photo-cap");
-  cap.append(el("span", "photo-title", item.title));
-  if (item.place) cap.append(el("span", "photo-place", item.place));
-  card.append(img, cap);
-  card.setAttribute("aria-label", `${item.title}${item.place ? ", " + item.place : ""}: view photo`);
-  card.addEventListener("click", () => openViewer(item));
+  cap.append(el("span", "photo-title", label));
+  if (cover.title) cap.append(el("span", "photo-place", cover.title));
+  face.append(img, count, cap);
+  card.append(stack, face);
+  card.addEventListener("click", () => openViewer(photos, 0));
   return card;
 }
 
 const renderCard = {
-  outdoors: photoCard,
   hackathons(h) {
     const card = el("article", "slide hack glow");
     if (h.image) {
@@ -85,7 +88,7 @@ const renderCard = {
       img.src = h.image; img.alt = h.alt || h.event; img.loading = "lazy"; img.decoding = "async";
       if (h.focus) img.style.objectPosition = h.focus;
       media.append(img);
-      media.addEventListener("click", () => openViewer({ image: h.image, alt: h.alt, title: h.event, place: h.place }));
+      media.addEventListener("click", () => openViewer([{ image: h.image, alt: h.alt, title: h.event, place: h.place }]));
       card.append(media);
     }
     const top = el("div", "card-top");
@@ -109,14 +112,6 @@ const renderCard = {
       card.append(links);
     }
     if (h.tags?.length) card.append(tagList(h.tags));
-    return card;
-  },
-  athletics(t) {
-    if (t.image) return photoCard(t);
-    const card = el("article", "slide log-card");
-    if (t.color) card.style.setProperty("--tint", t.color);
-    card.insertAdjacentHTML("afterbegin", svg(t.icon));
-    card.append(el("h3", null, t.title), el("p", null, t.text));
     return card;
   },
   notes(n) {
@@ -146,15 +141,19 @@ let setBeyondFilter = () => {};
   const present = GROUPS.filter((g) => (data[g.key] || []).length);
   if (!present.length) { section.remove(); return; }
 
-  present.forEach((g) => data[g.key].forEach((item) => {
-    const card = renderCard[g.key](item);
-    card.dataset.group = g.key;
-    track.append(card);
-  }));
+  present.forEach((g) => {
+    const photos = g.album ? data[g.key].filter((p) => p.image) : [];
+    const cards = g.album
+      ? (photos.length ? [albumCard(g.label, photos)] : [])
+      : data[g.key].map((item) => renderCard[g.key](item));
+    cards.forEach((card) => { card.dataset.group = g.key; track.append(card); });
+  });
 
-  // filter buttons: All + one per non-empty group (hidden when there's only one group)
+  // filter buttons: All + one per group. Only worth showing once 2+ groups have several cards each
+  // (albums count as one card), otherwise the deck is short enough to just swipe.
+  const countOf = (key) => track.querySelectorAll(`[data-group="${key}"]`).length;
   const total = track.children.length;
-  const options = [{ key: "all", label: "All", n: total }, ...present.map((g) => ({ ...g, n: data[g.key].length }))];
+  const options = [{ key: "all", label: "All", n: total }, ...present.map((g) => ({ ...g, n: countOf(g.key) }))];
   const buttons = options.map((o) => {
     const b = el("button", "filter");
     b.type = "button"; b.dataset.key = o.key;
@@ -163,7 +162,7 @@ let setBeyondFilter = () => {};
     filterBar.append(b);
     return b;
   });
-  if (present.length < 2) filterBar.remove();
+  if (present.filter((g) => countOf(g.key) >= 2).length < 2) filterBar.remove();
 
   let active = "all";
   setBeyondFilter = (key, instant = false) => {
@@ -217,20 +216,69 @@ let setBeyondFilter = () => {};
   });
 })();
 
-/* ---------- Photo viewer ---------- */
-let viewer;
-function openViewer(item) {
+/* ---------- Photo viewer (gallery) ---------- */
+let viewer, vStrip, vCount, vPrev, vNext, vItems = [], vIndex = 0;
+function openViewer(items, start = 0) {
   if (!viewer) {
     viewer = document.createElement("dialog");
     viewer.className = "viewer";
-    viewer.innerHTML = '<figure><img alt="" /><figcaption></figcaption></figure><button class="viewer-close" type="button" aria-label="Close photo">✕</button>';
-    viewer.addEventListener("click", (e) => { if (e.target === viewer || e.target.closest(".viewer-close")) viewer.close(); });
+    viewer.setAttribute("aria-label", "Photo gallery");
+    viewer.innerHTML = `
+      <div class="viewer-strip"></div>
+      <span class="viewer-count" aria-live="polite"></span>
+      <button class="viewer-nav viewer-prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
+      <button class="viewer-nav viewer-next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+      <button class="viewer-close" type="button" aria-label="Close gallery">✕</button>`;
     document.body.append(viewer);
+    vStrip = viewer.querySelector(".viewer-strip");
+    vCount = viewer.querySelector(".viewer-count");
+    vPrev = viewer.querySelector(".viewer-prev");
+    vNext = viewer.querySelector(".viewer-next");
+    vPrev.addEventListener("click", () => viewerGo(vIndex - 1));
+    vNext.addEventListener("click", () => viewerGo(vIndex + 1));
+    // close on the ✕ or on empty space around the photo
+    viewer.addEventListener("click", (e) => {
+      if (e.target.closest(".viewer-close") || e.target.classList.contains("viewer-slide") || e.target === viewer) viewer.close();
+    });
+    viewer.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") { e.preventDefault(); viewerGo(vIndex + 1); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); viewerGo(vIndex - 1); }
+    });
+    // keep the counter in sync with touch swipes
+    let raf;
+    vStrip.addEventListener("scroll", () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const i = Math.round(vStrip.scrollLeft / vStrip.clientWidth);
+        if (i !== vIndex) { vIndex = i; viewerUpdate(); }
+      });
+    }, { passive: true });
   }
-  const img = viewer.querySelector("img");
-  img.src = item.image; img.alt = item.alt || item.title || "";
-  viewer.querySelector("figcaption").textContent = [item.title, item.place].filter(Boolean).join(" · ");
+  vItems = items;
+  vStrip.replaceChildren(...items.map((it) => {
+    const fig = el("figure", "viewer-slide");
+    const img = el("img");
+    img.src = it.image; img.alt = it.alt || it.title || ""; img.decoding = "async";
+    fig.append(img);
+    const caption = [it.title, it.place].filter(Boolean).join(" · ");
+    if (caption) fig.append(el("figcaption", null, caption));
+    return fig;
+  }));
+  viewer.classList.toggle("single", items.length < 2);
   viewer.showModal();
+  vIndex = Math.max(0, Math.min(items.length - 1, start));
+  vStrip.scrollLeft = vIndex * vStrip.clientWidth;
+  viewerUpdate();
+}
+function viewerGo(i) {
+  vIndex = Math.max(0, Math.min(vItems.length - 1, i));
+  vStrip.scrollTo({ left: vIndex * vStrip.clientWidth, behavior: reduceMotion ? "auto" : "smooth" });
+  viewerUpdate();
+}
+function viewerUpdate() {
+  vCount.textContent = `${vIndex + 1} / ${vItems.length}`;
+  vPrev.disabled = vIndex <= 0;
+  vNext.disabled = vIndex >= vItems.length - 1;
 }
 
 /* ---------- Swipe decks ---------- */

@@ -26,14 +26,15 @@ Keep job-search details (availability dates, where you'd relocate) off the site.
 
 ### Adding to "Off the clock"
 
-`personal.js` holds four lists: `hackathons`, `outdoors`, `athletics`, and `notes`. Each list gets its own filter button, and an empty list hides its button. Add an object to any list:
+`personal.js` holds `hackathons`, `outdoors`, `athletics`, `notes`, and `reads` (Top 5 reads, its own section). Empty lists hide themselves. Filter buttons appear automatically once two or more kinds of cards have several entries each. Add an object to any list:
 
 ```js
 // hackathons
 { event: "HackMIT", place: "1st place", date: "Sep 2027", title: "What you built",
   text: "Two sentences.", tags: ["Python"], link: "https://github.com/…", team: "3-person team" }
 
-// outdoors / athletics — photo cards (put the photo in img/)
+// outdoors / athletics — each list shows as ONE album card; the first photo is the cover,
+// clicking it opens a swipeable gallery of the whole list (put photos in img/)
 { image: "img/race.jpg", title: "Race name", place: "City · finish time", alt: "What the photo shows", focus: "50% 40%" }
 
 // notes — image is optional (drop the file in img/); otherwise the emoji shows
