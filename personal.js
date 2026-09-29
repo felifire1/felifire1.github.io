@@ -28,12 +28,11 @@ window.PERSONAL = {
       event: "MongoDB AI Agent Challenge",
       place: "1st place",
       date: "May 2026",
-      // TODO: add what you built (title), stack, and a link
-      text: "First place in MongoDB's AI agent challenge at Tech Week 2026.",
+      text: "Built a semantic database on MongoDB for an Airbnb listings example, so searches match on meaning instead of exact keywords. First place at Tech Week 2026.",
       image: "img/mongodb-tech-week.jpg",
       alt: "William holding his prize next to a Tech Week 2026 banner",
       focus: "50% 55%",
-      tags: ["MongoDB", "AI agents"],
+      tags: ["MongoDB", "Semantic search", "AI agents"],
     },
     {
       event: "ASI Hackathon · Hacking the 4th Dimension",
@@ -57,12 +56,12 @@ window.PERSONAL = {
   outdoors: [
     { image: "img/kilimanjaro.jpg",      title: "Kilimanjaro",     place: "Stella Point · 5,756 m",
       alt: "William celebrating at the Stella Point sign on Mount Kilimanjaro", focus: "50% 40%" },
-    { image: "img/ice-climbing.jpg",     title: "Ice climbing",    place: "Glacier wall",
-      alt: "William ice climbing up a steep blue glacier wall", focus: "48% 68%" },
+    { image: "img/ice-climbing.jpg",     title: "Ice climbing",    place: "Iceland",
+      alt: "William ice climbing up a steep blue glacier wall in Iceland", focus: "48% 68%" },
     { image: "img/half-dome.jpg",        title: "Half Dome",       place: "Yosemite",
       alt: "William in front of the Half Dome cable route in Yosemite", focus: "35% 55%" },
-    { image: "img/rock-scramble.jpg",    title: "Rock scramble",
-      alt: "William scrambling up a boulder ridge above a forested valley", focus: "50% 70%" },
+    { image: "img/rock-scramble.jpg",    title: "Rock scramble", place: "White Mountains, NH",
+      alt: "William scrambling up a boulder ridge in the White Mountains", focus: "50% 70%" },
     { image: "img/offshore-fishing.jpg", title: "Offshore fishing", place: "Mahi-mahi",
       alt: "William on a fishing boat holding a large mahi-mahi", focus: "50% 38%" },
   ],
@@ -70,8 +69,8 @@ window.PERSONAL = {
   // ── Athletics ─────────────────────────────────────────────
   //   Same as Outdoors: one album card, FIRST photo is the cover.
   athletics: [
-    { image: "img/ironman-70-3-finish.jpg",         title: "IRONMAN 70.3",
-      alt: "William running toward the finish line of an IRONMAN 70.3", focus: "58% 50%" },
+    { image: "img/ironman-70-3-finish.jpg",         title: "IRONMAN 70.3", place: "Jones Beach, New York",
+      alt: "William running toward the finish line of IRONMAN 70.3 Jones Beach", focus: "58% 50%" },
     { image: "img/ironman-barranquilla-finish.jpg", title: "IRONMAN 70.3", place: "Barranquilla, Colombia",
       alt: "William running down the IRONMAN 70.3 Barranquilla finish chute", focus: "40% 55%" },
     { image: "img/hyrox.jpg",                       title: "HYROX",        place: "Finish time 1:20:44",
