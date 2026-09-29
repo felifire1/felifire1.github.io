@@ -71,6 +71,9 @@ function albumCard(label, photos) {
   const cap = el("span", "photo-cap");
   cap.append(el("span", "photo-title", label));
   if (cover.title) cap.append(el("span", "photo-place", cover.title));
+  const more = el("span", "album-more", window.matchMedia("(hover: none)").matches ? "Tap for more " : "Click for more ");
+  more.append(el("span", "arrow", "→"));
+  cap.append(more);
   face.append(img, count, cap);
   card.append(stack, face);
   card.addEventListener("click", () => openViewer(photos, 0));
