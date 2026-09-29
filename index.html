@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>William Quiroz</title>
+  <meta name="description" content="William Quiroz — data & AI engineer and endurance athlete. AI agents, LLM evaluation, and ML on real-world data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='6' y='18' width='88' height='64' rx='8' fill='%23ff7a45'/><text x='50' y='64' font-size='38' font-family='monospace' font-weight='700' text-anchor='middle' fill='%230d0e12'>WQ</text></svg>" />
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <header class="nav" id="top">
+    <a class="logo" href="#top" aria-label="Home">
+      <span class="bib"><i></i><i></i>WQ</span>
+      <span class="logo-text">William Quiroz</span>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    <nav class="nav-links">
+      <a href="#block">Now</a>
+      <a href="#built">Projects</a>
+      <a href="#course">Experience</a>
+      <a href="#log">Off the clock</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow"><span class="dot"></span>Hey, I'm William.</p>
+        <h1 class="stagger">I build AI systems that <span class="hl">go the distance.</span></h1>
+        <p class="lede">
+          I work on the parts of AI that decide whether it's <em>actually</em> useful: agents, evaluation,
+          and the data pipelines underneath. Before work, I'm usually in the pool, on the bike, or out running.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-solid" href="#built">See what I've built</a>
+          <a class="btn btn-ghost" href="#contact">Get in touch <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <aside class="readout tilt" aria-label="Profile summary">
+        <div class="readout-head">
+          <span>ATHLETE PROFILE</span>
+          <span class="live"><span class="pulse"></span>LIVE</span>
+        </div>
+        <dl>
+          <div><dt>Discipline</dt><dd>ML &amp; AI Engineering</dd></div>
+          <div><dt>Focus</dt><dd>Agents · LLM evals · ML systems</dd></div>
+          <div><dt>Home base</dt><dd>Boston, MA</dd></div>
+          <div><dt>Education</dt><dd>Northeastern '27</dd></div>
+          <div><dt>Training for</dt><dd>IRONMAN · Hyrox</dd></div>
+        </dl>
+        <svg class="elevation" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true">
+          <path class="elev-fill" d="M0 52 L20 48 L38 50 L60 40 L78 42 L96 30 L112 34 L130 22 L146 26 L162 14 L178 20 L196 8 L214 18 L232 12 L252 24 L270 20 L300 28 L300 60 L0 60 Z" />
+          <path class="elev-line" d="M0 52 L20 48 L38 50 L60 40 L78 42 L96 30 L112 34 L130 22 L146 26 L162 14 L178 20 L196 8 L214 18 L232 12 L252 24 L270 20 L300 28" />
+        </svg>
+        <div class="readout-foot"><span>2023</span><span>elevation gain: steady</span><span>today</span></div>
+      </aside>
+
+      <a class="scroll-hint" href="#block" aria-label="Scroll down"><span></span></a>
+    </section>
+
+    <!-- ============ NOW ============ -->
+    <section class="section reveal" id="block">
+      <p class="label">01 · Current training block <span class="updated">updated Sep 2026</span></p>
+      <h2>What I'm working on now.</h2>
+      <article class="feature glow">
+        <div class="feature-head">
+          <div>
+            <h3>Analytics Platform Engineer Co-op</h3>
+            <p class="where">WHOOP · Boston, MA · Jul 2026 – Present</p>
+          </div>
+          <span class="chip live-chip"><span class="pulse"></span>In progress</span>
+        </div>
+        <ul class="bullets">
+          <li><b>Is the agent's SQL actually right?</b> I built an automated accuracy framework that compares AI agent queries against our BI tools across semantic models.</li>
+          <li><b>Dev tooling.</b> I shipped 5+ tools that automate onboarding, git ops, and data quality, running alongside AI code review in CI.</li>
+          <li><b>Keeping the pipeline green.</b> I've resolved failures across 70+ dbt Cloud models through Terraform, shipping data fixes fast.</li>
+          <li><b>Cost.</b> I scoped the migration of 15 event-stream models off legacy ingestion, part of a $330K+/year cost reduction.</li>
+        </ul>
+        <ul class="tags"><li>dbt</li><li>Snowflake</li><li>Terraform</li><li>SQL</li><li>AI agents</li><li>Greptile</li></ul>
+      </article>
+    </section>
+
+    <!-- ============ PROJECTS (swipe deck) ============ -->
+    <section class="section reveal" id="built">
+      <div class="section-head">
+        <div>
+          <p class="label">02 · Things I've built</p>
+          <h2>Projects.</h2>
+        </div>
+        <div class="deck-controls" data-for="projects">
+          <span class="swipe-hint mono">swipe →</span>
+          <button class="deck-btn deck-prev" aria-label="Previous project"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
+          <button class="deck-btn deck-next" aria-label="Next project"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+        </div>
+      </div>
+
+      <div class="deck" id="projects">
+        <div class="track">
+          <article class="slide card glow">
+            <div class="card-top"><span class="mono">Apr 2026</span><span class="chip">Where my two worlds meet</span></div>
+            <h3>GritML</h3>
+            <p>A multi-task ML system that predicts injury risk and training load from wearable sensor data on 1,000+ athletes. Baseline and deep-learning models stress-tested against each other, on top of a 24-feature, 337K-row pipeline with rolling aggregations, z-score scaling, and SMOTE balancing.</p>
+            <div class="metrics"><span><b>0.948</b>AUC</span><span><b>0.988</b>R²</span><span><b>337K</b>rows</span></div>
+            <div class="card-links">
+              <a href="https://github.com/felifire1/GritML/blob/main/docs/GritML_Paper.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Read the paper</a>
+              <a href="https://github.com/felifire1/GritML" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>Code</a>
+            </div>
+            <ul class="tags"><li>Python</li><li>PyTorch</li><li>Scikit-Learn</li><li>Pandas</li></ul>
+          </article>
+
+          <article class="slide card glow">
+            <div class="card-top"><span class="mono">Apr 2026</span></div>
+            <h3>Kalshi BTC Alpha</h3>
+            <p>Finds mispriced Kalshi Bitcoin contracts by comparing market prices to a Black-Scholes fair value, then uses Logistic Regression, Random Forest, and XGBoost on 23 features to predict which gaps actually pay off. Backtested out of sample, with a live Streamlit signal dashboard.</p>
+            <div class="metrics"><span><b>58.3%</b>win rate</span><span><b>3.81%</b>avg profit / trade</span></div>
+            <div class="card-links">
+              <a href="https://github.com/felifire1/kalshi-btc-alpha" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>Code</a>
+            </div>
+            <ul class="tags"><li>Python</li><li>XGBoost</li><li>SciPy</li><li>DuckDB</li></ul>
+          </article>
+
+          <article class="slide card glow">
+            <div class="card-top"><span class="mono">May 2026 · ASI Hackathon</span></div>
+            <h3>FlightStrain</h3>
+            <p>Eight AI agents on a shared event bus drive a 4D avoidance engine for in-flight risk. A Random Forest trained on 162K flights and 9 features scores risk across 11 scenarios in real time.</p>
+            <div class="metrics"><span><b>64%</b>predicted fuel burn avoided</span><span><b>8</b>agents</span></div>
+            <div class="card-links">
+              <a href="https://github.com/felifire1/FlightStrain" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>Code</a>
+            </div>
+            <ul class="tags"><li>Python</li><li>FastAPI</li><li>Scikit-Learn</li><li>Claude</li></ul>
+          </article>
+
+          <article class="slide card glow">
+            <div class="card-top"><span class="mono">Jul 2024</span></div>
+            <h3>Forex Relationships</h3>
+            <p>I stored 8M+ lines of forex data in AWS S3 and queried and cleaned it with Athena. Then I built neural networks, regression trees, and SHAP analyses to explain how each trading feature drives P&amp;L.</p>
+            <div class="metrics"><span><b>98.3%</b>accurate SHAP values</span><span><b>8M+</b>rows</span></div>
+            <ul class="tags"><li>Python</li><li>SQL</li><li>AWS S3</li><li>Athena</li></ul>
+          </article>
+        </div>
+        <div class="dots" role="tablist"></div>
+      </div>
+
+      <a class="btn-ghost more" href="https://github.com/felifire1" target="_blank" rel="noopener">More on GitHub <span class="arrow">→</span></a>
+    </section>
+
+    <!-- ============ COURSE (experience) ============ -->
+    <section class="section reveal" id="course">
+      <p class="label">03 · The course so far</p>
+      <h2>Experience.</h2>
+      <ol class="course">
+        <li class="cp here">
+          <span class="cp-tag">📍 Now</span>
+          <div>
+            <h3>Analytics Platform Engineer Co-op</h3>
+            <p class="where">WHOOP · Boston, MA · Jul 2026 – Present</p>
+            <p>An AI-agent SQL accuracy framework, 5+ CI dev tools, dbt Cloud and Terraform reliability across 70+ models, and a migration that's part of $330K+/yr in savings.</p>
+          </div>
+        </li>
+        <li class="cp">
+          <span class="cp-tag">CP 4</span>
+          <div>
+            <h3>AI R&amp;D Engineer Intern</h3>
+            <p class="where">General Dynamics Mission Systems · Pittsfield, MA · May 2026 – Jul 2026</p>
+            <p>I owned the end-to-end design of an MCP server with 20+ tools that runs parallel LLM analysis on legacy codebases. I also designed a two-tier recommendation engine that pairs graph-based code analysis with LLM refactoring suggestions, scored by ML-predicted improvement ranges and gated by rate limits and cost estimates.</p>
+          </div>
+        </li>
+        <li class="cp">
+          <span class="cp-tag">CP 3</span>
+          <div>
+            <h3>Teaching Assistant, Advanced Programming with Data</h3>
+            <p class="where">Northeastern University · Jan 2026 – May 2026</p>
+            <p>I ran weekly office hours for 100+ students on Python, data structures, algorithms, and analysis, and graded weekly assignments with detailed notes on code quality, efficiency, and best practices.</p>
+          </div>
+        </li>
+        <li class="cp">
+          <span class="cp-tag">CP 2</span>
+          <div>
+            <h3>Digital Transformation &amp; Technology Co-op, SWE/ML</h3>
+            <p class="where">Chick-fil-A · Atlanta, GA · Aug 2025 – Dec 2025</p>
+            <p>I built ML analysis pipelines that sort and route communication lines at 97% accuracy, cutting 40 hours of labor a week. I also shipped full-stack API pipelines on AWS API Gateway, React, and Postman, and led Agile ceremonies and Jira workflows for the team.</p>
+          </div>
+        </li>
+        <li class="cp">
+          <span class="cp-tag">CP 1</span>
+          <div>
+            <h3>Co-Founder &amp; Co-President</h3>
+            <p class="where">Kappa Theta Pi, Professional Tech Fraternity · May 2024 – Apr 2025</p>
+            <p>I helped start the chapter and led 60+ members through 30+ technical, professional, and networking events, and reported financial and logistical statements to the university for our philanthropic and development work.</p>
+          </div>
+        </li>
+        <li class="cp start">
+          <span class="cp-tag">Start</span>
+          <div>
+            <h3>Started at Northeastern</h3>
+            <p class="where">Boston, MA · Sep 2023</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="toolkit reveal" aria-label="Toolkit">
+      <span class="toolkit-label">Toolkit</span>
+      <ul class="toolkit-list">
+        <li>Python</li><li>SQL</li><li>PyTorch</li><li>scikit-learn</li><li>XGBoost</li><li>pandas</li>
+        <li>Snowflake</li><li>dbt</li><li>AWS</li><li>FastAPI</li><li>MongoDB</li><li>Claude Code</li>
+      </ul>
+    </section>
+
+    <!-- ============ BEYOND THE RESUME (hackathons · training · notes, from personal.js) ============ -->
+    <section class="section reveal" id="log">
+      <div class="section-head">
+        <div>
+          <p class="label">04 · Beyond the resume</p>
+          <h2>Off the clock.</h2>
+        </div>
+        <div class="deck-controls" data-for="beyond">
+          <span class="swipe-hint mono">swipe →</span>
+          <button class="deck-btn deck-prev" aria-label="Previous card"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
+          <button class="deck-btn deck-next" aria-label="Next card"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+        </div>
+      </div>
+      <p class="log-intro">Weekend builds, races, and whatever else I'm into. I like problems with long feedback loops, whether that's a model that has to hold up in production or a race that takes all day.</p>
+      <div class="filters" role="group" aria-label="Filter cards"></div>
+      <div class="deck" id="beyond">
+        <div class="track"></div>
+        <div class="dots" role="tablist"></div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact reveal" id="contact">
+      <p class="label">Finish line</p>
+      <h2>Let's go the distance.</h2>
+      <p>Want to talk ML, AI agents, or endurance training? I'm always up for a conversation.</p>
+      <div class="cta-row center">
+        <a class="btn btn-solid" href="mailto:william.quiroz31@gmail.com">Email me</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/wf-quiroz" target="_blank" rel="noopener">LinkedIn <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" href="https://github.com/felifire1" target="_blank" rel="noopener">GitHub <span class="arrow">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year">2026</span> William Felipe Quiroz</span>
+    <span class="mono">Built between training sessions.</span>
+  </footer>
+
+  <script src="personal.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
