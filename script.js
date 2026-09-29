@@ -24,7 +24,7 @@ const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matc
   wrap(h1);
 })();
 
-/* ---------- "Beyond the resume": render personal.js (hackathons · training · notes) ---------- */
+/* ---------- "Beyond the resume": render personal.js (hackathons · outdoors · athletics · notes) ---------- */
 const ICONS = {
   swim: '<path d="M2 16c2-2 3.5-2 5 0s3 2 5 0 3.5-2 5 0 3 2 5 0M8 10a2 2 0 1 0 0-.1M10 12l4-4 4 3"/>',
   hyrox: '<path d="M6 7v10M18 7v10M3 9v6M21 9v6M6 12h12"/>',
@@ -53,7 +53,7 @@ function tagList(tags) {
 const GROUPS = [
   { key: "hackathons", label: "Hackathons" },
   { key: "outdoors", label: "Outdoors" },
-  { key: "training", label: "Training" },
+  { key: "athletics", label: "Athletics" },
   { key: "notes", label: "Notes" },
 ];
 
@@ -77,6 +77,17 @@ const renderCard = {
   outdoors: photoCard,
   hackathons(h) {
     const card = el("article", "slide hack glow");
+    if (h.image) {
+      const media = el("button", "hack-media");
+      media.type = "button";
+      media.setAttribute("aria-label", `${h.event}: view photo`);
+      const img = el("img");
+      img.src = h.image; img.alt = h.alt || h.event; img.loading = "lazy"; img.decoding = "async";
+      if (h.focus) img.style.objectPosition = h.focus;
+      media.append(img);
+      media.addEventListener("click", () => openViewer({ image: h.image, alt: h.alt, title: h.event, place: h.place }));
+      card.append(media);
+    }
     const top = el("div", "card-top");
     const place = h.place || "";
     const medal = /^1st/i.test(place) ? "🥇 " : /^2nd/i.test(place) ? "🥈 " : /^3rd/i.test(place) ? "🥉 " : "";
@@ -100,7 +111,7 @@ const renderCard = {
     if (h.tags?.length) card.append(tagList(h.tags));
     return card;
   },
-  training(t) {
+  athletics(t) {
     if (t.image) return photoCard(t);
     const card = el("article", "slide log-card");
     if (t.color) card.style.setProperty("--tint", t.color);
@@ -174,6 +185,36 @@ let setBeyondFilter = () => {};
   // any link with data-filter="hackathons" (etc.) jumps straight to that view
   document.querySelectorAll("[data-filter]").forEach((a) =>
     a.addEventListener("click", () => setBeyondFilter(a.dataset.filter, true)));
+})();
+
+/* ---------- Top 5 reads ---------- */
+(() => {
+  const section = document.getElementById("reads");
+  const list = section?.querySelector(".reads");
+  if (!list) return;
+  const reads = (window.PERSONAL?.reads || []).slice(0, 5);
+  if (!reads.length) {
+    section.remove();
+    document.querySelector('.nav-links a[href="#reads"]')?.remove();
+    return;
+  }
+  reads.forEach((r, i) => {
+    const li = el("li", "read");
+    const cover = el("div", "read-cover");
+    if (r.cover) {
+      const img = el("img"); img.src = r.cover; img.alt = `Cover of ${r.title}`; img.loading = "lazy";
+      cover.append(img);
+    } else {
+      cover.classList.add("blank");
+      cover.style.setProperty("--hue", String((i * 47 + 18) % 360));
+      cover.append(el("span", "read-cover-title", r.title), el("span", "read-cover-author", r.author));
+    }
+    const body = el("div", "read-body");
+    body.append(el("span", "read-rank", String(i + 1).padStart(2, "0")), el("h3", null, r.title), el("p", "where", r.author));
+    if (r.note) body.append(el("p", "read-note", r.note));
+    li.append(cover, body);
+    list.append(li);
+  });
 })();
 
 /* ---------- Photo viewer ---------- */

@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────
 // BEYOND THE RESUME — everything in the "Off the clock" deck.
 // Add, remove, or reorder entries; the deck and its filter
-// buttons (All / Hackathons / Outdoors / Training / Notes) update themselves.
+// buttons (All / Hackathons / Outdoors / Athletics / Notes) update themselves.
 // A group with no entries simply disappears.
 // ─────────────────────────────────────────────────────────────
 
@@ -11,11 +11,15 @@ window.PERSONAL = {
   //   place  – "1st place", "Finalist", …    (starts with "1st" → gold badge)
   //   title  – what you built                (optional)
   //   date, text, tags[], link, team         (optional)
+  //   image, alt, focus                      (optional photo shown at the top of the card)
   hackathons: [
     {
       event: "Chick-fil-A Ignite Hackathon",
       place: "1st place",
       date: "Nov 2025",
+      image: "img/ignite-hackathon.jpg",
+      alt: "William holding the Ignite Hackathon trophy in front of the Ignite sign",
+      focus: "50% 58%",
       title: "Restaurant Technology Explorer",
       text: "A full-stack app with an interactive 3D restaurant model that maps the software, infrastructure, and technology running in-store. I led backend development and the team's ceremonies, and designed and deployed the AWS-hosted APIs and databases behind its real-time data within 24 hours.",
       tags: ["AWS", "Python", "JavaScript"],
@@ -23,8 +27,12 @@ window.PERSONAL = {
     {
       event: "MongoDB AI Agent Challenge",
       place: "1st place",
-      // TODO: add date, what you built, stack, and a link
-      text: "First place in MongoDB's AI agent challenge.",
+      date: "May 2026",
+      // TODO: add what you built (title), stack, and a link
+      text: "First place in MongoDB's AI agent challenge at Tech Week 2026.",
+      image: "img/mongodb-tech-week.jpg",
+      alt: "William holding his prize next to a Tech Week 2026 banner",
+      focus: "50% 55%",
       tags: ["MongoDB", "AI agents"],
     },
     {
@@ -58,14 +66,27 @@ window.PERSONAL = {
       alt: "William on a fishing boat holding a large mahi-mahi", focus: "50% 38%" },
   ],
 
-  // ── Training ──────────────────────────────────────────────
-  //   icon  – swim | hyrox | run | bike | mountain | fish   (shown when there's no image)
-  //   color – accent color for the card
-  //   image, place, alt, focus – optional; add a photo and it becomes a photo card
-  training: [
-    { icon: "swim",  color: "#ff7a45", title: "IRONMAN",   text: "2.4 mi swim · 112 mi bike · 26.2 mi run. The best day-long argument for pacing yourself." },
-    { icon: "hyrox", color: "#ffc861", title: "Hyrox",     text: "8 km of running broken up by 8 functional stations. Sleds, burpees, wall balls." },
-    { icon: "run",   color: "#f472b6", title: "Marathons", text: "26.2, on repeat. Boston is a good city for it." },
+  // ── Athletics ─────────────────────────────────────────────
+  //   Same fields as Outdoors (image, title, place, alt, focus).
+  //   An entry without an image falls back to an icon card: icon (swim | hyrox | run | bike), color, text.
+  athletics: [
+    { image: "img/ironman-barranquilla-finish.jpg", title: "IRONMAN 70.3", place: "Barranquilla, Colombia",
+      alt: "William running down the IRONMAN 70.3 Barranquilla finish chute", focus: "40% 55%" },
+    { image: "img/hyrox.jpg",                       title: "HYROX",        place: "Finish time 1:20:44",
+      alt: "William and a fellow racer flexing in front of a HYROX finish-time screen reading 1:20:44", focus: "50% 45%" },
+    { image: "img/nyc-marathon.jpg",                title: "NYC Marathon", place: "TCS New York City Marathon",
+      alt: "William holding his bib at the TCS New York City Marathon expo", focus: "50% 55%" },
+    { image: "img/ironman-70-3-finish.jpg",         title: "IRONMAN 70.3",
+      alt: "William running toward the finish line of an IRONMAN 70.3", focus: "58% 50%" },
+    { image: "img/ironman-barranquilla-medal.jpg",  title: "Finisher",     place: "IRONMAN 70.3 Barranquilla",
+      alt: "William holding his finisher medal in front of the IRONMAN 70.3 Barranquilla sign", focus: "50% 45%" },
+  ],
+
+  // ── Top 5 reads ───────────────────────────────────────────
+  //   title, author (required) · note – one line on why (optional)
+  //   cover – "img/covers/…jpg" (optional; without it a styled placeholder cover is drawn)
+  //   Listed in rank order; only the first 5 show.
+  reads: [
   ],
 
   // ── Notes ─────────────────────────────────────────────────
