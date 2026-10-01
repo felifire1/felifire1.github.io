@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects · William Felipe Quiroz</title>
+  <meta name="description" content="Projects by William Felipe Quiroz — data & AI engineer and endurance athlete. AI agents, LLM evaluation, and ML on real-world data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='6' y='18' width='88' height='64' rx='8' fill='%23ff7a45'/><text x='50' y='61' font-size='30' font-family='monospace' font-weight='700' text-anchor='middle' fill='%230d0e12'>WFQ</text></svg>" />
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <header class="nav" id="top">
+    <a class="logo" href="index.html" aria-label="Home">
+      <span class="bib"><i></i><i></i>WFQ</span>
+      <span class="logo-text">William Felipe Quiroz</span>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    <nav class="nav-links">
+      <a href="projects.html" class="active" aria-current="page">Projects</a>
+      <a href="index.html#course">Experience</a>
+      <a href="index.html#log">Off the clock</a>
+      <a href="index.html#reads">Reads</a>
+      <a href="index.html#contact" class="nav-cta">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section projects-page">
+      <a class="btn-ghost back-link" href="index.html"><span class="arrow">←</span> Back home</a>
+      <p class="label">All projects</p>
+      <h1 class="page-title">Everything I've built.</h1>
+      <!-- filled from projects.js -->
+      <div class="project-grid" data-projects="all"></div>
+      <a class="btn-ghost more" href="https://github.com/wfquiroz" target="_blank" rel="noopener">More on GitHub <span class="arrow">→</span></a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year">2026</span> William Felipe Quiroz</span>
+    <span class="mono">Built between training sessions.</span>
+  </footer>
+
+  <script src="projects.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

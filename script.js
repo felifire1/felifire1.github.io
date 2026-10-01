@@ -27,6 +27,7 @@ const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matc
 /* ---------- "Beyond the resume": render personal.js (hackathons · outdoors · athletics · notes) ---------- */
 const ICONS = {
   github: '<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>',
+  paper: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
   photos: '<rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/><path d="m3 17 4-4 3 3 3-3 4 4"/>',
   link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
 };
@@ -189,6 +190,48 @@ let setBeyondFilter = () => {};
     a.addEventListener("click", () => setBeyondFilter(a.dataset.filter, true)));
 })();
 
+/* ---------- Projects (from projects.js) ---------- */
+function projectCard(p, { withLinks = true } = {}) {
+  const card = el("article", "card glow");
+  const top = el("div", "card-top");
+  top.append(el("span", "mono", p.date || ""));
+  if (p.badge) top.append(el("span", "chip", p.badge));
+  card.append(top, el("h3", null, p.title), el("p", null, p.text));
+  if (p.metrics?.length) {
+    const m = el("div", "metrics");
+    p.metrics.forEach(([value, label]) => { const span = el("span"); span.append(el("b", null, value), label); m.append(span); });
+    card.append(m);
+  }
+  if (withLinks && p.links?.length) {
+    const links = el("div", "card-links");
+    p.links.forEach((l) => {
+      const a = el("a"); a.href = l.href; a.target = "_blank"; a.rel = "noopener";
+      a.innerHTML = svg(l.icon || "link"); a.append(l.label);
+      links.append(a);
+    });
+    card.append(links);
+  }
+  if (p.tags?.length) card.append(tagList(p.tags));
+  return card;
+}
+document.querySelectorAll("[data-projects]").forEach((grid) => {
+  const all = window.PROJECTS || [];
+  const limit = grid.dataset.projects === "all" ? all.length : parseInt(grid.dataset.projects, 10) || 3;
+  all.slice(0, limit).forEach((p) => grid.append(projectCard(p)));
+  // home page: the next project peeks out, faded, under a "See all" button
+  if (limit < all.length) {
+    const teaser = el("a", "project-teaser");
+    teaser.href = "projects.html";
+    teaser.setAttribute("aria-label", `See all ${all.length} projects`);
+    const peek = projectCard(all[limit], { withLinks: false });
+    peek.setAttribute("aria-hidden", "true");
+    const cta = el("span", "teaser-cta");
+    cta.append(`See all ${all.length} projects `, el("span", "arrow", "→"));
+    teaser.append(peek, cta);
+    grid.after(teaser);
+  }
+});
+
 /* ---------- Top 5 reads ---------- */
 (() => {
   const section = document.getElementById("reads");
@@ -253,7 +296,7 @@ let setBeyondFilter = () => {};
 })();
 
 /* ---------- Photo viewer (gallery) ---------- */
-let viewer, vStrip, vCount, vPrev, vNext, vItems = [], vIndex = 0;
+let viewer, vStrip, vCount, vPrev, vNext, vThumbs, vItems = [], vIndex = 0;
 function openViewer(items, start = 0) {
   if (!viewer) {
     viewer = document.createElement("dialog");
@@ -264,12 +307,14 @@ function openViewer(items, start = 0) {
       <span class="viewer-count" aria-live="polite"></span>
       <button class="viewer-nav viewer-prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
       <button class="viewer-nav viewer-next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+      <div class="viewer-thumbs" role="tablist" aria-label="All photos"></div>
       <button class="viewer-close" type="button" aria-label="Close gallery">✕</button>`;
     document.body.append(viewer);
     vStrip = viewer.querySelector(".viewer-strip");
     vCount = viewer.querySelector(".viewer-count");
     vPrev = viewer.querySelector(".viewer-prev");
     vNext = viewer.querySelector(".viewer-next");
+    vThumbs = viewer.querySelector(".viewer-thumbs");
     vPrev.addEventListener("click", () => viewerGo(vIndex - 1));
     vNext.addEventListener("click", () => viewerGo(vIndex + 1));
     // close on the ✕ or on empty space around the photo
@@ -300,6 +345,14 @@ function openViewer(items, start = 0) {
     if (caption) fig.append(el("figcaption", null, caption));
     return fig;
   }));
+  vThumbs.replaceChildren(...items.map((it, i) => {
+    const b = el("button", "viewer-thumb");
+    b.type = "button"; b.setAttribute("role", "tab"); b.setAttribute("aria-label", `Photo ${i + 1}: ${it.title || ""}`);
+    const t = el("img"); t.src = it.image; t.alt = ""; if (it.focus) t.style.objectPosition = it.focus;
+    b.append(t);
+    b.addEventListener("click", () => viewerGo(i));
+    return b;
+  }));
   viewer.classList.toggle("single", items.length < 2);
   viewer.showModal();
   vIndex = Math.max(0, Math.min(items.length - 1, start));
@@ -315,6 +368,11 @@ function viewerUpdate() {
   vCount.textContent = `${vIndex + 1} / ${vItems.length}`;
   vPrev.disabled = vIndex <= 0;
   vNext.disabled = vIndex >= vItems.length - 1;
+  [...vThumbs.children].forEach((t, i) => {
+    t.classList.toggle("on", i === vIndex);
+    t.setAttribute("aria-selected", String(i === vIndex));
+    if (i === vIndex) t.scrollIntoView({ block: "nearest", inline: "center", behavior: reduceMotion ? "auto" : "smooth" });
+  });
 }
 
 /* ---------- Swipe decks ---------- */
@@ -449,14 +507,14 @@ function reveal() {
 /* ---------- Progress bar + active nav ---------- */
 const bar = document.querySelector(".progress span");
 const links = [...document.querySelectorAll(".nav-links a")];
-const sections = links.map((a) => document.querySelector(a.getAttribute("href")));
+const sections = links.map((a) => { const h = a.getAttribute("href"); return h.startsWith("#") ? document.querySelector(h) : null; });
 function onScroll() {
   const max = document.documentElement.scrollHeight - window.innerHeight;
   if (bar) bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + "%";
   const y = window.scrollY + 140;
   let cur = null;
   sections.forEach((s, i) => { if (s && s.offsetTop <= y) cur = i; });
-  links.forEach((a, i) => a.classList.toggle("active", i === cur));
+  links.forEach((a, i) => { if (sections[i]) a.classList.toggle("active", i === cur); });
   reveal();
 }
 window.addEventListener("scroll", onScroll, { passive: true });

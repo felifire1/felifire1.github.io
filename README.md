@@ -10,7 +10,8 @@ python3 -m http.server 8765
 
 | What | Where |
 |---|---|
-| Resume content (projects, experience) | `index.html` |
+| Projects (home shows the first 3 + a teaser; `projects.html` shows all) | `projects.js`, in priority order |
+| Experience | `index.html` |
 | Hackathons, outdoors, athletics, and notes cards ("Off the clock") | `personal.js`, grouped by type |
 | Colors, fonts, spacing | `:root` variables at the top of `styles.css` |
 | Hero "athlete profile" values | `index.html`, `<aside class="readout">` |
